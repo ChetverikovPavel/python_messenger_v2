@@ -1,0 +1,9 @@
+2022-03-11 00:11:13,662   ERROR      client.py             Не указан сервер для подключения. Подключение со стандартными параметрами: Адрес сервера: 127.0.0.1, порт: 7777
+2022-03-11 00:11:13,662   INFO       client.py             Запуск клиента. Параметры сервера: адрес: 127.0.0.1, порт: 7777
+2022-03-11 00:11:13,664   INFO       client.py             Сформировано presence сообщение: {'action': 'presence', 'time': 1646946673.664116, 'user': {'account_name': 'Guest'}}
+2022-03-11 00:11:13,695   DEBUG      client.py             Вызвана функция: create_presence с параметрами: (), {}. Результат работы функции: {'action': 'presence', 'time': 1646946673.664116, 'user': {'account_name': 'Guest'}}. Вызов из функции: main 
+2022-03-11 00:11:13,710   DEBUG      client.py             Вызвана функция: send_message с параметрами: (<socket.socket fd=292, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 52511), raddr=('127.0.0.1', 7777)>, {'action': 'presence', 'time': 1646946673.664116, 'user': {'account_name': 'Guest'}}), {}. Результат работы функции: None. Вызов из функции: main 
+2022-03-11 00:11:13,727   DEBUG      client.py             Вызвана функция: get_message с параметрами: (<socket.socket fd=292, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 52511), raddr=('127.0.0.1', 7777)>,), {}. Результат работы функции: {'status_code': 200, 'status': 'OK'}. Вызов из функции: main 
+2022-03-11 00:11:13,728   DEBUG      client.py             Разбор ответа от сервера: {'status_code': 200, 'status': 'OK'}
+2022-03-11 00:11:13,728   DEBUG      client.py             Вызвана функция: check_response с параметрами: ({'status_code': 200, 'status': 'OK'},), {}. Результат работы функции: 200: OK. Вызов из функции: main 
+2022-03-11 00:11:13,728   INFO       client.py             Ответ от сервера: 200: OK
