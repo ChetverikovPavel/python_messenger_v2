@@ -6,18 +6,18 @@ import json
 import logging
 import threading
 import logs.configs.client_log_config
-from common.variables import DEFAULT_IP_ADDRESS, DEFAULT_PORT, ACTION, TIME, \
-    USER, ACCOUNT_NAME, PRESENCE, STATUS_CODE, STATUS, MESSAGE, MESSAGE_TEXT, \
-    SENDER, EXIT, DESTINATION, ERROR
+from common.variables import *
 from common.utils import send_message, get_message
 from decors import log
+from descripts import Port
+from metaclasses import ClientMainVerifier, ClientOtherVerifier
 
 # Инициализация клиентского логера
 CLIENT_LOGGER = logging.getLogger('client')
 
 
 # Парсер аргументов коммандной строки
-@log
+# @log
 def arg_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('-a', default=DEFAULT_IP_ADDRESS, nargs='?')
@@ -27,25 +27,18 @@ def arg_parser():
     server_ip = namespace.a
     server_port = namespace.p
     client_name = namespace.n
-
-    try:
-        if server_port < 1024 or server_port > 65535:
-            raise ValueError
-    except ValueError:
-        CLIENT_LOGGER.critical(f'Попытка подключения к серверу с недопустимым портом: {server_port}. '
-                               f'Порт сервера должен быть в диапазоне от "1024" до "65535"')
-        sys.exit(1)
-
     return server_ip, server_port, client_name
 
 
-class Client:
+class Client(metaclass=ClientMainVerifier):
+    server_port = Port()
+
     def __init__(self, server_ip, server_port, client_name):
         self.server_ip = server_ip
         self.server_port = server_port
         self.client_name = client_name
 
-    @log
+    # @log
     def init_socket(self):
         if not self.client_name:
             self.client_name = input('Введите имя пользователя: ')
@@ -66,7 +59,7 @@ class Client:
             CLIENT_LOGGER.error(f'Получен некоректный ответ от сервера: {response_from_server}')
             sys.exit(1)
 
-    @log
+    # @log
     def main_loop(self):
 
         self.init_socket()
@@ -86,7 +79,7 @@ class Client:
                 continue
             break
 
-    @log
+    # @log
     def create_presence(self):
         out = {
             ACTION: PRESENCE,
@@ -98,7 +91,7 @@ class Client:
         CLIENT_LOGGER.info(f'Сформировано {PRESENCE} сообщение: {out}')
         return out
 
-    @log
+    # @log
     def check_presence_response(self, response):
         CLIENT_LOGGER.debug(f'Разбор ответа от сервера: {response}')
         if STATUS_CODE in response and ERROR in response:
@@ -109,13 +102,13 @@ class Client:
         raise ValueError
 
 
-class ClientSender(threading.Thread):
+class ClientSender(threading.Thread, metaclass=ClientOtherVerifier):
     def __init__(self, client_name, sock):
         self.client_name = client_name
         self.sock = sock
         super().__init__()
 
-    @log
+    # @log
     def create_message(self):
         to_user = input('Введите получателя сообщения: ')
         message = input('Введите сообщение: ')
@@ -130,7 +123,7 @@ class ClientSender(threading.Thread):
         send_message(self.sock, message_dict)
         return message_dict
 
-    @log
+    # @log
     def create_exit_message(self):
         return {
             ACTION: EXIT,
@@ -138,14 +131,14 @@ class ClientSender(threading.Thread):
             ACCOUNT_NAME: self.client_name
         }
 
-    @log
+    # @log
     def print_help(self):
         print('Поддерживаемые команды:')
         print('message() - отправить сообщение. Кому отправить сообщение и текст сообщения будет запрошены отдельно.')
         print('help() - вывести подсказки по командам')
         print('exit() - выход из программы')
 
-    @log
+    # @log
     def run(self):
         print(f'Авторизация под именем: {self.client_name}')
         self.print_help()
@@ -165,13 +158,13 @@ class ClientSender(threading.Thread):
                 print('Команда не распознана. Для вывода доступных команд напишите help().')
 
 
-class ClientReceiver(threading.Thread):
+class ClientReceiver(threading.Thread, metaclass=ClientOtherVerifier):
     def __init__(self, client_name, sock):
         self.client_name = client_name
         self.sock = sock
         super().__init__()
 
-    @log
+    # @log
     def run(self):
         while True:
             try:

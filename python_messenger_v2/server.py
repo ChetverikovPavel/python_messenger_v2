@@ -4,18 +4,18 @@ import logging
 import select
 import argparse
 import logs.configs.server_log_config
-from common.variables import DEFAULT_IP_ADDRESS, DEFAULT_PORT, MAX_CONNECTIONS, \
-    ACTION, PRESENCE, TIME, USER, ACCOUNT_NAME, STATUS_CODE, STATUS, MESSAGE, \
-    MESSAGE_TEXT, SENDER, DESTINATION, ERROR, EXIT
+from common.variables import *
 from common.utils import get_message, send_message
 from decors import log
+from descripts import Port
+from metaclasses import ServerVerifier
 
 # Инициализация логирования сервера
 SERVER_LOGGER = logging.getLogger('server')
 
 
 # Парсер аргументов коммандной строки
-@log
+# @log
 def arg_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('-a', default=DEFAULT_IP_ADDRESS, nargs='?')
@@ -23,20 +23,13 @@ def arg_parser():
     namespace = parser.parse_args(sys.argv[1:])
     server_ip = namespace.a
     server_port = namespace.p
-
-    try:
-        if server_port < 1024 or server_port > 65535:
-            raise ValueError
-    except ValueError:
-        SERVER_LOGGER.critical(f'Попытка запуска сервера с недопустимым портом: {server_port}. '
-                               f'Порт сервера должен быть в диапазоне от "1024" до "65535"')
-        sys.exit(1)
-
     return server_ip, server_port
 
 
 # Основной класс сервера
-class Server:
+class Server(metaclass=ServerVerifier):
+    server_port = Port()
+
     def __init__(self, server_ip, server_port):
         # Параметры подключения
         self.server_ip = server_ip
@@ -51,7 +44,7 @@ class Server:
         # Словарь имен и соответствующие им сокеты
         self.names = dict()
 
-    @log
+    # @log
     def init_socket(self):
         SERVER_LOGGER.info(f'Запущен сервер, адрес сервера: {self.server_ip} '
                            f'порт для подключений: {self.server_port} ')
@@ -61,7 +54,7 @@ class Server:
         self.sock = server_sock
         self.sock.listen()
 
-    @log
+    # @log
     def main_loop(self):
         self.init_socket()
 
@@ -102,7 +95,7 @@ class Server:
                     del self.names[message[DESTINATION]]
             self.messages.clear()
 
-    @log
+    # @log
     def process_client_message(self, message, client):
         SERVER_LOGGER.debug(f'Разбор сообщения от клиента: {message}')
         if ACTION in message and message[ACTION] == PRESENCE and \
@@ -140,7 +133,7 @@ class Server:
             })
             return
 
-    @log
+    # @log
     def process_message(self, message, socks):
         if message[DESTINATION] in self.names and self.names[message[DESTINATION]] in socks:
             send_message(self.names[message[DESTINATION]], message)
