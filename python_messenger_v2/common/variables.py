@@ -13,6 +13,7 @@ PRESENCE = 'presence'
 MESSAGE = 'message'
 EXIT = 'exit'
 ERROR = 'error'
+SERVER_DATABASE = 'sqlite:///server_base.db3'
 
 MESSAGE_TEXT = 'message_text'
 SENDER = 'from'

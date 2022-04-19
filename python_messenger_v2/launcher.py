@@ -1,5 +1,6 @@
 """Лаунчер"""
-
+import sys
+print(sys.path)
 import subprocess
 
 PROCESS = []
