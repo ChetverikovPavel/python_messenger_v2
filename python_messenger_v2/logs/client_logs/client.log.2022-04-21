@@ -1,0 +1,24 @@
+2022-04-21 17:20:34,696   CRITICAL   client.py             Потеряно соединение с сервером.
+2022-04-21 18:51:09,832   DEBUG      client.py             Инициализация клиента.
+2022-04-21 18:51:09,916   DEBUG      client.py             Инициализация клиента.
+2022-04-21 18:51:10,011   DEBUG      client.py             Инициализация клиента.
+2022-04-21 18:51:10,337   INFO       client.py             Сформировано presence сообщение: {'action': 'presence', 'time': 1650556270.3376935, 'user': {'account_name': 'test3'}}
+2022-04-21 18:51:10,398   DEBUG      client.py             Вызвана функция: send_message с параметрами: (<socket.socket fd=436, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 58696), raddr=('127.0.0.1', 7777)>, {'action': 'presence', 'time': 1650556270.3376935, 'user': {'account_name': 'test3'}}), {}. Результат работы функции: None. Вызов из функции: init_socket 
+2022-04-21 18:51:10,432   INFO       client.py             Сформировано presence сообщение: {'action': 'presence', 'time': 1650556270.4320436, 'user': {'account_name': 'test2'}}
+2022-04-21 18:51:10,492   DEBUG      client.py             Вызвана функция: send_message с параметрами: (<socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 58697), raddr=('127.0.0.1', 7777)>, {'action': 'presence', 'time': 1650556270.4320436, 'user': {'account_name': 'test2'}}), {}. Результат работы функции: None. Вызов из функции: init_socket 
+2022-04-21 18:51:10,526   INFO       client.py             Сформировано presence сообщение: {'action': 'presence', 'time': 1650556270.5262065, 'user': {'account_name': 'test1'}}
+2022-04-21 18:51:10,587   DEBUG      client.py             Вызвана функция: send_message с параметрами: (<socket.socket fd=544, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 58698), raddr=('127.0.0.1', 7777)>, {'action': 'presence', 'time': 1650556270.5262065, 'user': {'account_name': 'test1'}}), {}. Результат работы функции: None. Вызов из функции: init_socket 
+2022-04-21 18:51:10,919   DEBUG      client.py             Вызвана функция: get_message с параметрами: (<socket.socket fd=436, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 58696), raddr=('127.0.0.1', 7777)>,), {}. Результат работы функции: {'status_code': 200, 'status': 'OK'}. Вызов из функции: init_socket 
+2022-04-21 18:51:10,919   DEBUG      client.py             Разбор ответа от сервера: {'status_code': 200, 'status': 'OK'}
+2022-04-21 18:51:10,919   INFO       client.py             Установленно соединение с сервером. Ответ сервера: 200: OK
+2022-04-21 18:51:10,957   DEBUG      client.py             Вызвана функция: get_message с параметрами: (<socket.socket fd=408, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 58697), raddr=('127.0.0.1', 7777)>,), {}. Результат работы функции: {'status_code': 200, 'status': 'OK'}. Вызов из функции: init_socket 
+2022-04-21 18:51:10,957   DEBUG      client.py             Разбор ответа от сервера: {'status_code': 200, 'status': 'OK'}
+2022-04-21 18:51:10,957   INFO       client.py             Установленно соединение с сервером. Ответ сервера: 200: OK
+2022-04-21 18:51:10,995   DEBUG      client.py             Вызвана функция: get_message с параметрами: (<socket.socket fd=544, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 58698), raddr=('127.0.0.1', 7777)>,), {}. Результат работы функции: {'status_code': 200, 'status': 'OK'}. Вызов из функции: init_socket 
+2022-04-21 18:51:10,995   DEBUG      client.py             Разбор ответа от сервера: {'status_code': 200, 'status': 'OK'}
+2022-04-21 18:51:10,995   INFO       client.py             Установленно соединение с сервером. Ответ сервера: 200: OK
+2022-04-21 18:51:10,996   DEBUG      client.py             Запущены процессы получения и отправки сообщений.
+2022-04-21 18:51:11,007   DEBUG      client.py             Запущены процессы получения и отправки сообщений.
+2022-04-21 18:51:11,040   DEBUG      client.py             Запущены процессы получения и отправки сообщений.
+2022-04-21 20:18:45,253   CRITICAL   client.py             Потеряно соединение с сервером.
+2022-04-21 20:18:45,253   CRITICAL   client.py             Потеряно соединение с сервером.

@@ -1,6 +1,5 @@
 """Лаунчер"""
-import sys
-print(sys.path)
+
 import subprocess
 
 PROCESS = []
@@ -13,13 +12,13 @@ while True:
         break
     elif ACTION == 's':
         PROCESS.append(subprocess.Popen('python server.py',
-                                        creationflags=subprocess.CREATE_NEW_CONSOLE))
+                                        creationflags=subprocess.CREATE_NEW_CONSOLE, shell=True))
         PROCESS.append(subprocess.Popen('python client.py -n test1',
-                                        creationflags=subprocess.CREATE_NEW_CONSOLE))
+                                        creationflags=subprocess.CREATE_NEW_CONSOLE, shell=True))
         PROCESS.append(subprocess.Popen('python client.py -n test2',
-                                        creationflags=subprocess.CREATE_NEW_CONSOLE))
+                                        creationflags=subprocess.CREATE_NEW_CONSOLE, shell=True))
         PROCESS.append(subprocess.Popen('python client.py -n test3',
-                                        creationflags=subprocess.CREATE_NEW_CONSOLE))
+                                        creationflags=subprocess.CREATE_NEW_CONSOLE, shell=True))
     elif ACTION == 'x':
         while PROCESS:
             VICTIM = PROCESS.pop()
